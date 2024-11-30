@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 import sys
 
-MAX_START_VAL = 100_000_000
+MAX_START_VAL = 1_000_000
 
 def next_collatz(n):
     if n % 2 == 0:
@@ -17,10 +17,9 @@ def collatz(max_val):
     collatz_nextval = [0] * (max_val + 1)
     for start_val in range(1, max_val + 1):
         # Every 5%, print progress
-        if start_val % (max_val // 20) == 0:
-            print(f"Progress: {start_val:,}/{max_val:,} ({start_val / max_val * 100:.2f}%)")
+        # if start_val % (max_val // 20) == 0:
+        #     print(f"Progress: {start_val:,}/{max_val:,} ({start_val / max_val * 100:.2f}%)")
         if collatz_nextval[start_val] != 0:
-            # print("Skipping", start_val, "has already stored", collatz_nextval[start_val])
             skipped += 1
             continue
         current_val = start_val
@@ -37,24 +36,43 @@ def format_output(output):
     # Make the output array a pretty string
     output_str = []
     for i in range(len(output)):
-        output_str.append(str(i+1) + ": " + str(output[i]))
+        output_str.append(f"{i+1}: {output[i]}")
     return "\n".join(output_str)
 
 def main():
     start = time()
     output = collatz(MAX_START_VAL)
     end = time()
-    print("Took", (end - start) / 1e9, "seconds")
+    print("Collatz took", (end - start) / 1e9, "seconds")
     
     output = output[1:]
     output_dir = Path(__file__).parent / "outputs" # Directory for outputs
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     output_path = output_dir / f"collatz-{MAX_START_VAL:_}.txt"
+    
+    print("Formatting output...")
+    formatStart = time()
+    formatted = format_output(output)
+    formatEnd = time()
+    print("Output formatting took", (formatEnd - formatStart) / 1e9, "seconds")
+    
+    
+    print("Writing output to", output_path)
+    writeStart = time()
     with open(output_path, "w") as f:
-        f.write(format_output(output))
+        f.write(formatted)
+    writeEnd = time()
+    print("Output written in", (writeEnd - writeStart) / 1e9, "seconds")
 
-    print("Output written to", output_path)
 
 if __name__ == "__main__":
     main()
+    
+# 4
+# 35
+# 349
+# 3492
+# 34895
+# 3489368
+# 34893828
