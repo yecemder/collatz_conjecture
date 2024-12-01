@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 import sys
 
-MAX_START_VAL = 1_000_000
+MAX_START_VAL = 100000
 
 def next_collatz(n):
     if n % 2 == 0:
@@ -43,25 +43,24 @@ def main():
     end = time()
     print("Collatz took", (end - start) / 1e9, "seconds")
     
-    output = output[1:]
-    output_dir = Path(__file__).parent / "outputs" # Directory for outputs
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-    output_path = output_dir / f"collatz-{MAX_START_VAL:_}.txt"
+    # output = output[1:]
+    # output_dir = Path(__file__).parent / "outputs" # Directory for outputs
+    # if not os.path.exists(output_dir):
+    #     os.makedirs(output_dir)
+    # output_path = output_dir / f"collatz-{MAX_START_VAL:_}.txt"
     
-    print("Formatting output...")
-    formatStart = time()
-    formatted = format_output(output)
-    formatEnd = time()
-    print("Output formatting took", (formatEnd - formatStart) / 1e9, "seconds")
+    # print("Formatting output...")
+    # formatStart = time()
+    # formatted = format_output(output)
+    # formatEnd = time()
+    # print("Output formatting took", (formatEnd - formatStart) / 1e9, "seconds")
     
-    
-    print("Writing output to", output_path)
-    writeStart = time()
-    with open(output_path, "w") as f:
-        f.write(formatted)
-    writeEnd = time()
-    print("Output written in", (writeEnd - writeStart) / 1e9, "seconds")
+    # print("Writing output to", output_path)
+    # writeStart = time()
+    # with open(output_path, "w") as f:
+    #     f.write(formatted)
+    # writeEnd = time()
+    # print("Output written in", (writeEnd - writeStart) / 1e9, "seconds")
 
 
 if __name__ == "__main__":
