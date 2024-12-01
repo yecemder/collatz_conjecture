@@ -16,9 +16,6 @@ def collatz(max_val):
     skipped = 0
     collatz_nextval = [0] * (max_val + 1)
     for start_val in range(1, max_val + 1):
-        # Every 5%, print progress
-        # if start_val % (max_val // 20) == 0:
-        #     print(f"Progress: {start_val:,}/{max_val:,} ({start_val / max_val * 100:.2f}%)")
         if collatz_nextval[start_val] != 0:
             skipped += 1
             continue
@@ -29,7 +26,8 @@ def collatz(max_val):
             if next_val > max_val:
                 break
             current_val = next_val
-    print(f"Skipped {skipped} values out of {max_val} ({skipped / max_val * 100:.2f}%)")
+    
+    print(f"Skipped {skipped:_} values out of {max_val:_} ({skipped / max_val * 100:.2f}%)")
     return collatz_nextval
 
 def format_output(output):
