@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 import sys
 
-MAX_START_VAL = 10_000_000
+MAX_START_VAL = 100_000_000
 skipped = 0
 
 def next_collatz(n):
@@ -42,7 +42,7 @@ def main():
     output = collatz(MAX_START_VAL)
     end = time()
     print(f"Skipped {skipped:_} values out of {MAX_START_VAL:_}")
-    print("Took", (end - start) / 1e3, "microseconds to compute")
+    print(f"Took {((end - start) / 1e3):_} microseconds to compute")
     
     # output = output[1:]
     # output_dir = Path(__file__).parent / "outputs" # Directory for outputs
